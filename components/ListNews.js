@@ -4,8 +4,8 @@ import News from './News'
 
 class ListNews extends React.Component {
 
-  _viewDetail = (url) => {
-    this.props.nav.navigate('Detail', { url: url })
+  _viewDetail = (item) => {
+    this.props.nav.navigate('Detail', { item: item })
   }
 
   render() {
@@ -17,7 +17,7 @@ class ListNews extends React.Component {
         data={data}
         renderItem={({ item }) =>
           <TouchableHighlight
-            onPress={() => this._viewDetail(item.url)}
+            onPress={() => this._viewDetail(item)}
             underlayColor={'#FFF'}>
             <News news={item} />
           </TouchableHighlight>}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, WebView, StyleSheet } from 'react-native'
+import { View, Image, Text, ScrollView, StyleSheet } from 'react-native'
 
 class DetailScreen extends React.Component {
 
@@ -9,21 +9,48 @@ class DetailScreen extends React.Component {
 
   render() {
 
-    const url = this.props.navigation.getParam('url')
+    const item = this.props.navigation.getParam('item')
 
     return (
-      <View style={styles.container}>
-        <WebView
-          source={{ uri: url }}
-        />
-      </View>
+      <ScrollView style={{ backgroundColor: 'white' }}>
+        <View style={styles.container}>
+          <Text
+            style={styles.title}>
+            {item.title}</Text>
+          <Image
+            source={{
+              uri: item.urlToImage ? item.urlToImage : 'http://via.placeholder.com/100x200'
+            }}
+            style={styles.image} />
+          <Text
+            style={styles.description}>
+            {item.description ? item.description : 'Tidak ada deskripsi berita.'}</Text>
+        </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    padding: 10
+  },
+  title: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  image: {
+    flex: 1,
+    height: 200,
+    padding: 10,
+    marginTop: 10,
+  },
+  description: {
+    flex: 1,
+    marginTop: 10,
+    fontSize: 16,
   }
 })
 
