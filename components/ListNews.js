@@ -1,30 +1,33 @@
 import React from 'react'
 import { FlatList, TouchableHighlight } from 'react-native'
 import News from './News'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getNews } from '../store/actions'
 
 class ListNews extends React.Component {
 
   _viewDetail = (item) => {
-    this.props.nav.navigate('Detail', { item: item })
+    this.props.nav.navigate('Detail')
+    this.props.getNews(item)
   }
 
   render() {
-
-    const { data } = this.props
-
     return (
       <FlatList
-        data={data}
+        data={this.props.data}
         renderItem={({ item }) =>
           <TouchableHighlight
             onPress={() => this._viewDetail(item)}
             underlayColor={'#FFF'}>
             <News news={item} />
           </TouchableHighlight>}
-        keyExtractor={item => item.url}
+        keyExtractor={item => item.title}
       />
     )
   }
 }
 
-export default ListNews
+const mapDispatchToProps = (dispatch) => bindActionCreators({ getNews }, dispatch)
+
+export default connect(null, mapDispatchToProps)(ListNews)

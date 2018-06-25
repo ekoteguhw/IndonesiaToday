@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image, Text, ScrollView, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 
 class DetailScreen extends React.Component {
 
@@ -9,7 +10,7 @@ class DetailScreen extends React.Component {
 
   render() {
 
-    const item = this.props.navigation.getParam('item')
+    const item = this.props.redux.item
 
     return (
       <ScrollView style={{ backgroundColor: 'white' }}>
@@ -54,4 +55,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DetailScreen
+const mapStateToProps = (state) => {
+  return {
+    redux: state
+  }
+}
+
+export default connect(mapStateToProps)(DetailScreen)

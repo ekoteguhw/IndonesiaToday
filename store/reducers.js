@@ -1,18 +1,26 @@
-import { SET_NEWS } from './actionTypes'
+import { SET_NEWS, GET_NEWS } from './actionTypes'
 
 const initialState = {
-  news: []
+  news: [],
+  item: {}
 }
 
 const reducers = (state = initialState, action) => {
-  if (action.type === SET_NEWS) {
-    return {
-      ...state,
-      news: action.payload
-    }
-  }
 
-  return state
+  switch (action.type) {
+    case SET_NEWS:
+      return {
+        ...state,
+        news: action.payload
+      }
+    case GET_NEWS:
+      return {
+        ...state,
+        item: action.payload
+      }
+    default:
+      return state
+  }
 }
 
 export default reducers
